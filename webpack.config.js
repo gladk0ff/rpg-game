@@ -1,14 +1,18 @@
 const path = require('path');
 const HTMLwebpackPlugin = require('html-webpack-plugin');
 
+const NODE_ENV = process.env.NODE_ENV||'development';
+const isDev= NODE_ENV==='development';
+
+
 module.exports = {
-  mode: 'development',
-  entry: path.resolve(__dirname, 'src/index.js'),
+  mode: NODE_ENV,
+  entry: path.resolve(__dirname, 'src/index.js'), 
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  watch: true,
+  watch: isDev,
   watchOptions: {
     ignored: /node_modules/,
     poll: 1000,
@@ -52,4 +56,5 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
   },
+  devtool:isDev? 'source-map':false
 };

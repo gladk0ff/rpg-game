@@ -9,7 +9,10 @@
     "prettier": "npx prettier --write .",
     "server": "npx webpack server",
     "prepare": "husky install",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "wp":"webpack",
+    "build:prod":" set NODE_ENV=production && npm run wp",
+    "build:dev":" set NODE_ENV=development && npm run wp"
   },
   "repository": {
     "type": "git",
