@@ -1,1 +1,1 @@
-console.log("lo11g");
+console.log('lo11g');
