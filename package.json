@@ -8,7 +8,6 @@
     "lint": "npx eslint src/**/*.js",
     "prettier": "npx prettier --write .",
     "server": "npx webpack server",
-    "prepare": "husky install",
     "precommit": "lint-staged",
     "wp":"webpack",
     "build:prod":" set NODE_ENV=production && npm run wp",
