@@ -8,7 +8,8 @@
     "lint": "npx eslint src/**/*.js",
     "prettier": "npx prettier --write .",
     "server": "npx webpack server",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -23,17 +24,26 @@
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "babel-core": "^6.26.3",
+    "babel-eslint": "8.2.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.6",
     "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-mfe": "0.1.2",
+    "eslint-plugin-import": "^2.23.4",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
+    "husky": "0.14.3",
+    "lint-staged": "6.1.0",
     "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.0.0",
     "webpack": "^5.41.0",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2",
-    "husky": "^6.0.0"
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {},
+  "lint-staged": {
+    "*.js": "eslint"
   }
 }
