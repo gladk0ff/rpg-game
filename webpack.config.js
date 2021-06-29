@@ -20,6 +20,24 @@ module.exports = {
         loader: 'babel-loader',
         exclude: [/node_modules/],
       },
+      {
+        test:/\.scss$/,
+        use:[
+          'style-loader','css-loader','sass-loader'
+        ]
+      },
+      {
+        test:[/\.svg$/,/\.png$/,/\.jpeg$/,/\.bmp$/,/\.gif$/,],
+        use:[
+          {
+            loader:'file-loader',
+            options:{
+              name:'[name].[ext]',
+              outputPath:'assets/',
+            }
+          }
+        ]
+      }
     ],
   },
   plugins: [
