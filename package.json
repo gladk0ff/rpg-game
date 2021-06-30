@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "wp": "webpack",
-    "build:prod": " set NODE_ENV=production && npm run wp",
+    "build": " set NODE_ENV=production && npm run wp",
     "build:dev": " set NODE_ENV=development && npm run wp",
     "lint": "npx eslint src/**/*.js",
     "prettier": "npx prettier --write .",
