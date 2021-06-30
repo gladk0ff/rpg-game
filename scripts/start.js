@@ -21,7 +21,6 @@ const init = async () => {
         method: 'GET',
         path: '/{path*}',
         handler: (request, h) => {
-            return "привет";
             if (FILES.test(request.path)) {
                 return h.file(path.join(process.cwd(), 'dist', request.path));
             }
