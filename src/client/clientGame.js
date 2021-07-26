@@ -3,7 +3,6 @@ import sprites from '../configs/sprites';
 import levelCfg from '../configs/world.json';
 import World from './world';
 import gameObjects from '../configs/gameObjects.json';
-import { move } from '../common/util';
 
 class ClientGame {
   constructor(cnf) {
@@ -37,11 +36,24 @@ class ClientGame {
 
   initKeys() {
     this.engine.input.onKey({
-      ArrowLeft: move(this.player, -1, 0),
-      ArrowUp: move(this.player, 0, -1),
-      ArrowDown: move(this.player, 0, 1),
-      ArrowRight: move(this.player, 1, 0),
+      ArrowLeft: this.movePlayerByKey(-1, 0),
+      ArrowUp: this.movePlayerByKey(0, -1),
+      ArrowDown: this.movePlayerByKey(0, 1),
+      ArrowRight: this.movePlayerByKey(1, 0),
     });
+  }
+
+  movePlayerByKey(offsetX, offsetY) {
+    return (keydown) => {
+      if (keydown) {
+        this.player.moveByCellCoord &&
+          this.player.moveByCellCoord(offsetX, offsetY, (cell) => {
+            if (cell.findObjectsByType('grass')) {
+              return cell.findObjectsByType('grass').length;
+            }
+          });
+      }
+    };
   }
 
   static init(cnf) {
