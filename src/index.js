@@ -1,3 +1,6 @@
 import './index.scss';
+import ClientGame from './client/clientGame';
 
-console.log('lo11g');
+window.addEventListener('load', () => {
+  ClientGame.init({ tagID: 'game' });
+});
