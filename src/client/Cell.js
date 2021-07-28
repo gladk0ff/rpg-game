@@ -48,7 +48,6 @@ class ClientCell extends PositionedObject {
   }
 
   removeGameObject(objToRemove) {
-    // this.objects = this.objects;
     this.objects.forEach((layer, layerId) => (this.objects[layerId] = layer.filter((obj) => obj !== objToRemove)));
   }
 
