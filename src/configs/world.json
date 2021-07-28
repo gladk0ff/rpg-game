@@ -35,7 +35,6 @@
         ],
         [
             [["wall"]],
-            [["grass", {"type":"boy2","player":true}]],
             [["grass"]],
             [["grass"]],
             [["grass"]],
@@ -43,6 +42,7 @@
             [["grass"]],
             [["grass"]],
             [["grass"]],
+            [["grass"], [], [{ "type": "boy2", "player": true}]],
             [["grass"]],
             [["grass"]],
             [["grass"]],
