@@ -20,13 +20,18 @@ class ClientGame {
     this.player = player;
   }
   createEngine() {
-    return new ClientEngine(document.getElementById(this.cnf.tagID));
+    return new ClientEngine(document.getElementById(this.cnf.tagID), this);
+  }
+
+  getWorld() {
+    return this.world;
   }
 
   initEngine() {
     this.engine.loadSprites(sprites).then(() => {
       this.world.init();
       this.engine.on('render', (_, time) => {
+        this.engine.camera.focusAtGameObject(this.player);
         this.world.render(time);
       });
       this.engine.start();
@@ -36,24 +41,25 @@ class ClientGame {
 
   initKeys() {
     this.engine.input.onKey({
-      ArrowLeft: this.movePlayerByKey(-1, 0),
-      ArrowUp: this.movePlayerByKey(0, -1),
-      ArrowDown: this.movePlayerByKey(0, 1),
-      ArrowRight: this.movePlayerByKey(1, 0),
+      ArrowLeft: (keydown) => keydown && this.movePlayerByKey(-1, 0, 'left'),
+      ArrowUp: (keydown) => keydown && this.movePlayerByKey(0, -1, 'up'),
+      ArrowDown: (keydown) => keydown && this.movePlayerByKey(0, 1, 'down'),
+      ArrowRight: (keydown) => keydown && this.movePlayerByKey(1, 0, 'right'),
     });
   }
 
-  movePlayerByKey(offsetX, offsetY) {
-    return (keydown) => {
-      if (keydown) {
-        this.player.moveByCellCoord &&
-          this.player.moveByCellCoord(offsetX, offsetY, (cell) => {
-            if (cell.findObjectsByType('grass')) {
-              return cell.findObjectsByType('grass').length;
-            }
-          });
+  movePlayerByKey(offsetX, offsetY, state) {
+    const { player } = this;
+    if (player && player.motionProgress === 1) {
+      const canMovie = player.moveByCellCoord(offsetX, offsetY, (cell) => {
+        return cell.findObjectsByType('grass').length;
+      });
+
+      if (canMovie) {
+        player.setState(state);
+        player.once('motion-stopped', () => player.setState('main'));
       }
-    };
+    }
   }
 
   static init(cnf) {
